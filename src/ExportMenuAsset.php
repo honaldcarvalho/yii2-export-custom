@@ -8,8 +8,6 @@
 
 namespace kartik\export;
 
-use kartik\base\AssetBundle;
-
 /**
  * Asset bundle for ExportMenu Widget (for export menu data)
  *
