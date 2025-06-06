@@ -733,7 +733,7 @@ class ExportMenu extends GridView
             return chr(ord('A') + $i);
         }
         if ($i > 25) {
-            return (self::columnName($i / 26)).(self::columnName($i % 26 + 1));
+            return (self::columnName($i / 26)) . (self::columnName($i % 26 + 1));
         }
 
         return 'A';
@@ -745,16 +745,9 @@ class ExportMenu extends GridView
     public function init()
     {
         $this->initSettings();
-        parent::init();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    
 
         if (isset($this->dropdownOptions) && is_array($this->dropdownOptions)) {
-            Html::addCssClass($this->dropdownOptions, 'dropdown-toggle');
+            \yii\helpers\Html::addCssClass($this->dropdownOptions, 'dropdown-toggle');
             if (!isset($this->dropdownOptions['data-bs-toggle'])) {
                 $this->dropdownOptions['data-bs-toggle'] = 'dropdown';
             }
@@ -763,7 +756,13 @@ class ExportMenu extends GridView
             }
         }
 
-public function run()
+        parent::init();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function run()
     {
         $this->initI18N(__DIR__);
         $this->initColumnSelector();
@@ -818,7 +817,7 @@ public function run()
             );
         }
         $filename = static::sanitize($this->filename);
-        $file = self::slash($this->folder).$filename.'.'.$config['extension'];
+        $file = self::slash($this->folder) . $filename . '.' . $config['extension'];
         if ($this->stream) {
             $this->clearOutputBuffers();
         }
@@ -836,14 +835,14 @@ public function run()
                 $config = ArrayHelper::getValue($this->exportConfig, $this->_exportType, []);
                 if (!empty($config)) {
                     $l = $this->linkFileName;
-                    $fileName = (!isset($l) || $l === '' ? $this->filename : $l).'.'.$config['extension'];
+                    $fileName = (!isset($l) || $l === '' ? $this->filename : $l) . '.' . $config['extension'];
                     echo $this->render(
                         $this->afterSaveView,
                         [
                             'notBs3' => !$this->isBs(3),
                             'file' => $fileName,
                             'icon' => $config['icon'],
-                            'href' => Url::to([self::slash($this->linkPath, '/').$fileName]),
+                            'href' => Url::to([self::slash($this->linkPath, '/') . $fileName]),
                         ]
                     );
                 }
@@ -863,7 +862,7 @@ public function run()
             $this->options['id'] = $this->getId();
         }
         if (empty($this->exportRequestParam)) {
-            $this->exportRequestParam = 'exportFull_'.$this->options['id'];
+            $this->exportRequestParam = 'exportFull_' . $this->options['id'];
         }
         $path = '@vendor/weebz/yii2export/src/views';
         if (!isset($this->exportColumnsView)) {
@@ -927,7 +926,7 @@ public function run()
             // generate body
             $index = 2;
             foreach ($sheetData as $key => $value) {
-                $sheet->setCellValue('A'.$index, $key)->setCellValue('B'.$index++, $value);
+                $sheet->setCellValue('A' . $index, $key)->setCellValue('B' . $index++, $value);
             }
         }
     }
@@ -956,7 +955,7 @@ public function run()
             ->setError(Yii::t('kvexport', 'Value is not in list.'))
             ->setPromptTitle(Yii::t('kvexport', 'Pick from list'))
             ->setPrompt(Yii::t('kvexport', 'Please pick a value from the drop-down list.'))
-            ->setFormula1($sheetName.'!$B$2:$B$'.($length + 1));
+            ->setFormula1($sheetName . '!$B$2:$B$' . ($length + 1));
     }
 
     /**
@@ -964,9 +963,9 @@ public function run()
      */
     public function initExport()
     {
-        $this->_provider = clone($this->dataProvider);
+        $this->_provider = clone ($this->dataProvider);
         if ($this->batchSize && $this->_provider->pagination) {
-            $this->_provider->pagination = clone($this->dataProvider->pagination);
+            $this->_provider->pagination = clone ($this->dataProvider->pagination);
             $this->_provider->pagination->pageSize = $this->batchSize;
             $this->_provider->refresh();
             if (Yii::$app->request->getBodyParam('exportFull_export')) {
@@ -989,7 +988,7 @@ public function run()
         }
         Html::addCssClass($this->exportFormOptions, 'kv-export-full-form');
         if (!isset($this->exportFormOptions['id'])) {
-            $this->exportFormOptions['id'] = $this->options['id'].'-export-form';
+            $this->exportFormOptions['id'] = $this->options['id'] . '-export-form';
         }
         $this->_provider->refresh();
     }
@@ -1012,14 +1011,14 @@ public function run()
             if (isset($settings['icon'])) {
                 $iconOptions = ArrayHelper::getValue($settings, 'iconOptions', []);
                 Html::addCssClass($iconOptions, $settings['icon']);
-                $label = Html::tag('i', '', $iconOptions).' ';
+                $label = Html::tag('i', '', $iconOptions) . ' ';
             }
             if (isset($settings['label'])) {
                 $label .= $settings['label'];
             }
             $fmt = strtolower($format);
             $linkOptions = ArrayHelper::getValue($settings, 'linkOptions', []);
-            $linkOptions['id'] = $this->options['id'].'-'.$fmt;
+            $linkOptions['id'] = $this->options['id'] . '-' . $fmt;
             $linkOptions['data-format'] = $format;
             $options = ArrayHelper::getValue($settings, 'options', []);
             Html::addCssClass($linkOptions, "export-full-{$fmt}");
@@ -1061,9 +1060,9 @@ public function run()
         Html::addCssClass($this->dropdownOptions, ['btn', $this->getDefaultBtnCss()]);
         $notBs3 = !$this->isBs(3);
         $iconCss = $notBs3 ? 'fas fa-external-link-alt' : 'bi bi-export';
-        $icon = ArrayHelper::remove($this->dropdownOptions, 'icon', '<i class="'.$iconCss.'"></i>');
+        $icon = ArrayHelper::remove($this->dropdownOptions, 'icon', '<i class="' . $iconCss . '"></i>');
         $label = ArrayHelper::remove($this->dropdownOptions, 'label');
-        $label = $label === null ? $icon : $icon.' '.$label;
+        $label = $label === null ? $icon : $icon . ' ' . $label;
         if (!isset($this->dropdownOptions['title'])) {
             $this->dropdownOptions['title'] = Yii::t('kvexport', 'Export data in selected format');
         }
@@ -1171,7 +1170,7 @@ public function run()
             /**
              * @var ExportWriterPdf $writer
              */
-            $writer->filename = $this->filename.'.'.ArrayHelper::getValue($cfg, 'extension', 'pdf');
+            $writer->filename = $this->filename . '.' . ArrayHelper::getValue($cfg, 'extension', 'pdf');
             $writer->pdfConfig = ArrayHelper::getValue($cfg, 'pdfConfig', []);
         }
         /**
@@ -1206,9 +1205,9 @@ public function run()
         $sheet = $this->_objWorksheet;
         foreach ($this->contentBefore as $contentBefore) {
             $format = ArrayHelper::getValue($contentBefore, 'cellFormat');
-            $this->setOutCellValue($sheet, $colFirst.$this->_beginRow, $contentBefore['value'], $format);
+            $this->setOutCellValue($sheet, $colFirst . $this->_beginRow, $contentBefore['value'], $format);
             $opts = $this->getStyleOpts($contentBefore);
-            $sheet->getStyle($colFirst.$this->_beginRow)->applyFromArray($opts);
+            $sheet->getStyle($colFirst . $this->_beginRow)->applyFromArray($opts);
             $this->_beginRow += 1;
         }
     }
@@ -1235,7 +1234,7 @@ public function run()
              * @var DataColumn $column
              */
             $head = ($column instanceof DataColumn) ? $this->getColumnHeader($column) : $column->header;
-            $id = self::columnName($this->_endCol).$this->_beginRow;
+            $id = self::columnName($this->_endCol) . $this->_beginRow;
             $format = ArrayHelper::remove($column->headerOptions, 'cellFormat');
             $cell = $this->setOutCellValue($sheet, $id, $head, $format);
             if (isset($column->hAlign) && !isset($opts['alignment']['horizontal'])) {
@@ -1249,11 +1248,11 @@ public function run()
             $this->raiseEvent('onRenderHeaderCell', [$cell, $head, $this]);
         }
         for ($i = $this->_headerBeginRow; $i < ($this->_beginRow); $i++) {
-            $sheet->mergeCells($colFirst.$i.':'.self::columnName($this->_endCol).$i);
+            $sheet->mergeCells($colFirst . $i . ':' . self::columnName($this->_endCol) . $i);
         }
 
         // Freeze the top row
-        $sheet->freezePane($colFirst.($this->_beginRow + 1));
+        $sheet->freezePane($colFirst . ($this->_beginRow + 1));
     }
 
     /**
@@ -1279,8 +1278,10 @@ public function run()
         foreach ($this->columns as $key => $column) {
             $isActionColumn = $column instanceof ActionColumn;
             $isNoExport = in_array($key, $this->noExportColumns) ||
-                ($this->showColumnSelector && is_array($this->selectedColumns) && !in_array($key,
-                        $this->selectedColumns));
+                ($this->showColumnSelector && is_array($this->selectedColumns) && !in_array(
+                    $key,
+                    $this->selectedColumns
+                ));
             if ($isActionColumn && !$isNoExport) {
                 $this->noExportColumns[] = $key;
             }
@@ -1373,8 +1374,8 @@ public function run()
                 }
                 if (!is_null($this->_groupedRow)) {
                     $this->_endRow++;
-                    $this->_objWorksheet->fromArray($this->_groupedRow, null, 'A'.($this->_endRow + 1), true);
-                    $cell = 'A'.($this->_endRow + 1).':'.self::columnName(count($columns)).($this->_endRow + 1);
+                    $this->_objWorksheet->fromArray($this->_groupedRow, null, 'A' . ($this->_endRow + 1), true);
+                    $cell = 'A' . ($this->_endRow + 1) . ':' . self::columnName(count($columns)) . ($this->_endRow + 1);
                     $this->_objWorksheet->getStyle($cell)->applyFromArray($this->groupedRowStyle);
                     $this->_groupedRow = null;
                 }
@@ -1437,13 +1438,13 @@ public function run()
             //20201026 Scott: To avoid 'Closure object cannot have properties' error 
             try {
                 $format = ArrayHelper::getValue($contentOptions, 'cellFormat');
-            } catch (Exception|Throwable $e) {
+            } catch (Exception | Throwable $e) {
                 $format = null;
             }
 
             $cell = $this->setOutCellValue(
                 $this->_objWorksheet,
-                self::columnName($this->_endCol).($index + $this->_beginRow + 1),
+                self::columnName($this->_endCol) . ($index + $this->_beginRow + 1),
                 $value,
                 $format
             );
@@ -1477,7 +1478,7 @@ public function run()
                 $format = ArrayHelper::remove($column->footerOptions, 'cellFormat');
                 $cell = $this->setOutCellValue(
                     $this->_objSpreadsheet->getActiveSheet(),
-                    self::columnName($this->_endCol).($row + 1),
+                    self::columnName($this->_endCol) . ($row + 1),
                     $footer,
                     $format
                 );
@@ -1505,13 +1506,13 @@ public function run()
         $sheet = $this->_objWorksheet;
         foreach ($this->contentAfter as $contentAfter) {
             $format = ArrayHelper::getValue($contentAfter, 'cellFormat');
-            $this->setOutCellValue($sheet, $colFirst.$row, $contentAfter['value'], $format);
+            $this->setOutCellValue($sheet, $colFirst . $row, $contentAfter['value'], $format);
             $opts = $this->getStyleOpts($contentAfter);
-            $sheet->getStyle($colFirst.$row)->applyFromArray($opts);
+            $sheet->getStyle($colFirst . $row)->applyFromArray($opts);
             $row += 1;
         }
         for ($i = $afterContentBeginRow; $i < $row; $i++) {
-            $sheet->mergeCells($colFirst.$i.':'.self::columnName($this->_endCol).$i);
+            $sheet->mergeCells($colFirst . $i . ':' . self::columnName($this->_endCol) . $i);
         }
     }
 
@@ -1649,8 +1650,8 @@ public function run()
     protected function generateBox()
     {
         // Set autofilter on
-        $from = self::columnName(1).$this->_beginRow;
-        $to = self::columnName($this->_endCol).($this->_endRow + $this->_beginRow);
+        $from = self::columnName(1) . $this->_beginRow;
+        $to = self::columnName($this->_endCol) . ($this->_endRow + $this->_beginRow);
         $box = "{$from}:{$to}";
         $this->_objWorksheet->setAutoFilter($box);
         if (isset($this->boxStyleOptions[$this->_exportType])) {
@@ -1658,7 +1659,7 @@ public function run()
         }
 
         if (isset($this->headerStyleOptions[$this->_exportType])) {
-            $to = self::columnName($this->_endCol).$this->_beginRow;
+            $to = self::columnName($this->_endCol) . $this->_beginRow;
             $box = "{$from}:{$to}";
             $this->_objWorksheet->getStyle($box)->applyFromArray($this->headerStyleOptions[$this->_exportType]);
         }
@@ -1700,13 +1701,13 @@ public function run()
             } elseif ($f === 'percent' || $f === 'decimal' || $f === 'currency') {
                 $code = '';
                 if ($f === 'currency') {
-                    $code = ArrayHelper::getValue($fmt, 1, $this->formatter->currencyCode).' ';
+                    $code = ArrayHelper::getValue($fmt, 1, $this->formatter->currencyCode) . ' ';
                 }
                 $decimals = ArrayHelper::getValue($fmt, 1, ($f === 'percent' ? 0 : 2));
                 $d = intval($decimals);
-                $code .= '#'.$this->formatter->thousandSeparator.'##0';
+                $code .= '#' . $this->formatter->thousandSeparator . '##0';
                 if ($d > 0) {
-                    $code .= $this->formatter->decimalSeparator.str_repeat('0', $d);
+                    $code .= $this->formatter->decimalSeparator . str_repeat('0', $d);
                 }
                 if ($f === 'percent') {
                     $code .= '%';
@@ -1773,18 +1774,18 @@ public function run()
         Html::addCssClass($this->columnSelectorOptions, ['btn', $this->getDefaultBtnCss(), 'dropdown-toggle']);
         $header = ArrayHelper::getValue($this->columnSelectorOptions, 'header', Yii::t('kvexport', 'Select Columns'));
         $this->columnSelectorOptions['header'] = (!isset($header) || $header === false) ? '' :
-            '<li class="dropdown-header">'.$header.'</li><li class="kv-divider"></li>';
-        $id = $this->options['id'].'-cols';
+            '<li class="dropdown-header">' . $header . '</li><li class="kv-divider"></li>';
+        $id = $this->options['id'] . '-cols';
         Html::addCssClass($this->columnSelectorMenuOptions, 'dropdown-menu kv-checkbox-list');
         $this->columnSelectorMenuOptions = array_replace_recursive(
             [
-                'id' => $id.'-list',
+                'id' => $id . '-list',
                 'role' => 'menu',
                 'aria-labelledby' => $id,
             ],
             $this->columnSelectorMenuOptions
         );
-        $dataToggle = 'data-'.($this->isBs(5) ? 'bs-' : '').'toggle';
+        $dataToggle = 'data-' . ($this->isBs(5) ? 'bs-' : '') . 'toggle';
         $this->columnSelectorOptions = array_replace_recursive(
             [
                 'id' => $id,
@@ -1818,7 +1819,7 @@ public function run()
     protected function getColumnLabel($key, $column)
     {
         $key++;
-        $label = Yii::t('kvexport', 'Column').' '.$key;
+        $label = Yii::t('kvexport', 'Column') . ' ' . $key;
         if (isset($column->label)) {
             $label = $column->label;
         } elseif (isset($column->header)) {
@@ -1984,14 +1985,14 @@ public function run()
             $options['colSelId'] = $this->columnSelectorOptions['id'];
         }
         $options = Json::encode($options);
-        $menu = 'kvexpmenu_'.hash('crc32', $options);
+        $menu = 'kvexpmenu_' . hash('crc32', $options);
         $view->registerJs("var {$menu} = {$options};\n", View::POS_HEAD);
         $script = '';
         foreach ($this->exportConfig as $format => $setting) {
             if (!isset($setting) || $setting === false) {
                 continue;
             }
-            $id = $this->options['id'].'-'.strtolower($format);
+            $id = $this->options['id'] . '-' . strtolower($format);
             $options = Json::encode([
                 'settings' => new JsExpression($menu),
                 'alertMsg' => $setting['alertMsg'],
@@ -2121,7 +2122,7 @@ public function run()
         foreach ($this->getVisibleColumns() as $key => $column) {
             $value = $groupFooter[$key] ?? '';
             //$endGroupedCol++;
-            $groupedRange = self::columnName($key + 1).$firstLine.':'.self::columnName($key + 1).$endLine;
+            $groupedRange = self::columnName($key + 1) . $firstLine . ':' . self::columnName($key + 1) . $endLine;
             //$lastCell = self::columnName($key + 1) . $endLine - 1;
             if (isset($column->group) && $column->group) {
                 $this->_objWorksheet->mergeCells($groupedRange);
@@ -2131,7 +2132,7 @@ public function run()
                     $value = "=SUM($groupedRange)";
                     break;
                 case self::F_COUNT:
-                    $value = '=COUNTIF('.$groupedRange.',"*")';
+                    $value = '=COUNTIF(' . $groupedRange . ',"*")';
                     break;
                 case self::F_AVG:
                     $value = "=AVERAGE($groupedRange)";
@@ -2161,7 +2162,7 @@ public function run()
         header('Cache-Control: public, must-revalidate, max-age=0');
         header('Pragma: public');
         header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
-        header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
         if (!empty($mime)) {
             header("Content-Type: {$mime}; charset={$this->encoding}");
         }
