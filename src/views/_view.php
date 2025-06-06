@@ -20,11 +20,11 @@ use yii\helpers\Html;
 $badgePrefix = $notBs3 ? 'badge bg-' : 'label label-';
 ?>
 <div class="alert alert-success alert-dismissible" role="alert" style="margin:10px 0">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
     <strong><?= Yii::t('kvexport', 'Exported File') ?>: </strong>
-    <span class="h5" data-toggle="tooltip" title="<?= Yii::t('kvexport', 'Download exported file') ?>">
-        <?= Html::a("<i class='{$icon}'></i> {$file}", $href, ['class' => $badgePrefix.'success']) ?>
+    <span class="h5" data-bs-toggle="tooltip" title="<?= Yii::t('kvexport', 'Download exported file') ?>">
+        <?= Html::a("<i class='bi bi-file-earmark-arrow-down'></i> {$file}", $href, ['class' => $badgePrefix.'success']) ?>
     </span>
 </div>

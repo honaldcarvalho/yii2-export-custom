@@ -151,7 +151,7 @@ class ExportMenu extends GridView
      * @var array the HTML attributes for the export button menu. Applicable only if [[asDropdown]] is set to `true`.
      * The following special options are available:
      * - `label`: _string_, defaults to empty string
-     * - `icon`: _string_, defaults to `<i class="glyphicon glyphicon-export"></i>` for BS3 and
+     * - `icon`: _string_, defaults to `<i class="bi bi-export"></i>` for BS3 and
      * `<i class="fas fa-external-link-alt"></i>` for BS4
      * - `title`: _string_, defaults to `Export data in selected format`.
      * - `menuOptions`: _array_, the HTML attributes for the dropdown menu.
@@ -194,7 +194,7 @@ class ExportMenu extends GridView
      * @var array the HTML attributes for the column selector dropdown button. The following special options are
      * recognized:
      * - `label`: _string_, defaults to empty string.
-     * - `icon`: _string_, defaults to `<i class="glyphicon glyphicon-list"></i>` for BS3 and
+     * - `icon`: _string_, defaults to `<i class="bi bi-list"></i>` for BS3 and
      * `<i class="fas fa-list"></i>` for BS4
      * - `title`: _string_, defaults to `Select columns for export`.
      */
@@ -305,7 +305,7 @@ class ExportMenu extends GridView
      * @var array the export configuration. The array keys must be the one of the `format` constants (CSV, HTML, TEXT,
      * EXCEL, PDF) and the array value is a configuration array consisting of these settings:
      * - `label`: _string_, the label for the export format menu item displayed
-     * - `icon`: _string_, the glyphicon or font-awesome name suffix to be displayed before the export menu item label. If
+     * - `icon`: _string_, the bi or font-awesome name suffix to be displayed before the export menu item label. If
      *   set to an empty string_, this will not be displayed.
      * - `iconOptions`: _array_, HTML attributes for export menu icon.
      * - `linkOptions`: _array_, HTML attributes for each export item link.
@@ -1048,7 +1048,7 @@ class ExportMenu extends GridView
     {
         Html::addCssClass($this->dropdownOptions, ['btn', $this->getDefaultBtnCss()]);
         $notBs3 = !$this->isBs(3);
-        $iconCss = $notBs3 ? 'fas fa-external-link-alt' : 'glyphicon glyphicon-export';
+        $iconCss = $notBs3 ? 'fas fa-external-link-alt' : 'bi bi-export';
         $icon = ArrayHelper::remove($this->dropdownOptions, 'icon', '<i class="'.$iconCss.'"></i>');
         $label = ArrayHelper::remove($this->dropdownOptions, 'label');
         $label = $label === null ? $icon : $icon.' '.$label;
@@ -1776,7 +1776,7 @@ class ExportMenu extends GridView
         $this->columnSelectorOptions = array_replace_recursive(
             [
                 'id' => $id,
-                'icon' => !$this->isBs(3) ? '<i class="fas fa-list"></i>' : '<i class="glyphicon glyphicon-list"></i>',
+                'icon' => !$this->isBs(3) ? '<i class="fas fa-list"></i>' : '<i class="bi bi-list"></i>',
                 'title' => Yii::t('kvexport', 'Select columns to export'),
                 'type' => 'button',
                 $dataToggle => 'dropdown',
@@ -1863,7 +1863,7 @@ class ExportMenu extends GridView
         $this->_defaultExportConfig = [
             self::FORMAT_HTML => [
                 'label' => Yii::t('kvexport', 'HTML'),
-                'icon' => $notBs3 ? 'fas fa-file-alt' : ($isFa ? 'fa fa-file-text' : 'glyphicon glyphicon-save'),
+                'icon' => $notBs3 ? 'fas fa-file-alt' : ($isFa ? 'fa fa-file-text' : 'bi bi-save'),
                 'iconOptions' => ['class' => 'text-info'],
                 'linkOptions' => [],
                 'options' => ['title' => Yii::t('kvexport', 'Hyper Text Markup Language')],
@@ -1874,7 +1874,7 @@ class ExportMenu extends GridView
             ],
             self::FORMAT_CSV => [
                 'label' => Yii::t('kvexport', 'CSV'),
-                'icon' => $notBs3 ? 'fas fa-file-code' : ($isFa ? 'fa fa-file-code-o' : 'glyphicon glyphicon-floppy-open'),
+                'icon' => $notBs3 ? 'fas fa-file-code' : ($isFa ? 'fa fa-file-code-o' : 'bi bi-floppy-open'),
                 'iconOptions' => ['class' => 'text-primary'],
                 'linkOptions' => [],
                 'options' => ['title' => Yii::t('kvexport', 'Comma Separated Values')],
@@ -1886,7 +1886,7 @@ class ExportMenu extends GridView
             ],
             self::FORMAT_TEXT => [
                 'label' => Yii::t('kvexport', 'Text'),
-                'icon' => $notBs3 ? 'far fa-file-alt' : ($isFa ? 'fa fa-file-text-o' : 'glyphicon glyphicon-floppy-save'),
+                'icon' => $notBs3 ? 'far fa-file-alt' : ($isFa ? 'fa fa-file-text-o' : 'bi bi-floppy-save'),
                 'iconOptions' => ['class' => 'text-muted'],
                 'linkOptions' => [],
                 'options' => ['title' => Yii::t('kvexport', 'Tab Delimited Text')],
@@ -1898,7 +1898,7 @@ class ExportMenu extends GridView
             ],
             self::FORMAT_PDF => [
                 'label' => Yii::t('kvexport', 'PDF'),
-                'icon' => $notBs3 ? 'far fa-file-pdf' : ($isFa ? 'fa fa-file-pdf-o' : 'glyphicon glyphicon-floppy-disk'),
+                'icon' => $notBs3 ? 'far fa-file-pdf' : ($isFa ? 'fa fa-file-pdf-o' : 'bi bi-floppy-disk'),
                 'iconOptions' => ['class' => 'text-danger'],
                 'linkOptions' => [],
                 'options' => ['title' => Yii::t('kvexport', 'Portable Document Format')],
@@ -1911,7 +1911,7 @@ class ExportMenu extends GridView
             ],
             self::FORMAT_EXCEL => [
                 'label' => Yii::t('kvexport', 'Excel 95 +'),
-                'icon' => $notBs3 ? 'far fa-file-excel' : ($isFa ? 'fa fa-file-excel-o' : 'glyphicon glyphicon-floppy-remove'),
+                'icon' => $notBs3 ? 'far fa-file-excel' : ($isFa ? 'fa fa-file-excel-o' : 'bi bi-floppy-remove'),
                 'iconOptions' => ['class' => 'text-success'],
                 'linkOptions' => [],
                 'options' => ['title' => Yii::t('kvexport', 'Microsoft Excel 95+ (xls)')],
@@ -1922,7 +1922,7 @@ class ExportMenu extends GridView
             ],
             self::FORMAT_EXCEL_X => [
                 'label' => Yii::t('kvexport', 'Excel 2007+'),
-                'icon' => $notBs3 ? 'fas fa-file-excel' : ($isFa ? 'fa fa-file-excel-o' : 'glyphicon glyphicon-floppy-remove'),
+                'icon' => $notBs3 ? 'fas fa-file-excel' : ($isFa ? 'fa fa-file-excel-o' : 'bi bi-floppy-remove'),
                 'iconOptions' => ['class' => 'text-success'],
                 'linkOptions' => [],
                 'options' => ['title' => Yii::t('kvexport', 'Microsoft Excel 2007+ (xlsx)')],

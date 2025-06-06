@@ -33,7 +33,7 @@ if (!empty($icon)) {
     $label = $icon.' '.$label;
 }
 echo Html::beginTag('div', ['class' => 'btn-group', 'role' => 'group']);
-echo Html::button($label.' <span class="caret"></span>', $options);
+echo Html::button($label.' <i class="bi bi-caret-down-fill"></i>', $options);
 foreach ($columnSelector as $value => $label) {
     if (in_array($value, $hiddenColumns)) {
         $checked = in_array($value, $selectedColumns);
