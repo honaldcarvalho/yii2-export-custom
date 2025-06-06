@@ -745,15 +745,6 @@ class ExportMenu extends GridView
     public function init()
     {
         $this->initSettings();
-
-        \yii\helpers\Html::addCssClass($this->dropdownOptions, 'dropdown-toggle');
-        if (!isset($this->dropdownOptions['data-bs-toggle'])) {
-            $this->dropdownOptions['data-bs-toggle'] = 'dropdown';
-        }
-        if (!isset($this->dropdownOptions['aria-expanded'])) {
-            $this->dropdownOptions['aria-expanded'] = 'false';
-        }
-
         parent::init();
     }
 

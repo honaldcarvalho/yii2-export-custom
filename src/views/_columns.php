@@ -33,7 +33,7 @@ if (!empty($icon)) {
     $label = $icon.' '.$label;
 }
 echo Html::beginTag('div', ['class' => 'btn-group', 'role' => 'group']);
-echo Html::button($label.' <i class="bi bi-caret-down-fill"></i>', $options);
+echo Html::button($label.' <span class="caret"></span>', $options);
 foreach ($columnSelector as $value => $label) {
     if (in_array($value, $hiddenColumns)) {
         $checked = in_array($value, $selectedColumns);
@@ -54,6 +54,7 @@ if ($notBs3) {
 }
 $cbxToggle = 'export_columns_toggle';
 $cbxToggleId = $cbxToggle.'_'.$id;
+$menuOptions['class'] = ($menuOptions['class'] ?? '') . ' dropdown-menu show';
 echo Html::beginTag('ul', $menuOptions);
 ?>
 
