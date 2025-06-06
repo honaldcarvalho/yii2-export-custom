@@ -33,7 +33,7 @@
   },
   "autoload": {
     "psr-4": {
-      "kartik\\export\\": "src"
+      "weebz\\yii2export\\": "src"
     }
   },
   "extra": {
