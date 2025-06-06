@@ -7,7 +7,7 @@
  * @version   1.4.3
  */
 
-namespace kartik\export;
+namespace weebz\export;
 
 use Closure;
 use Exception;

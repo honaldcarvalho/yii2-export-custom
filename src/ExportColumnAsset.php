@@ -6,7 +6,7 @@
  * @version 1.4.3
  */
 
-namespace kartik\export;
+namespace weebz\export;
 
 use kartik\base\AssetBundle;
 
