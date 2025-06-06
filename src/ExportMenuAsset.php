@@ -6,7 +6,7 @@
  * @version 1.4.3
  */
 
-namespace weebz\export;
+namespace weebz\yii2export;
 
 /**
  * Asset bundle for ExportMenu Widget (for export menu data)

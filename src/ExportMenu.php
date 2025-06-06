@@ -7,7 +7,7 @@
  * @version   1.4.3
  */
 
-namespace weebz\export;
+namespace weebz\yii2export;
 
 use Closure;
 use Exception;
