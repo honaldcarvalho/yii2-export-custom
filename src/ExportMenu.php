@@ -751,7 +751,19 @@ class ExportMenu extends GridView
     /**
      * @inheritdoc
      */
-    public function run()
+    
+
+        if (isset($this->dropdownOptions) && is_array($this->dropdownOptions)) {
+            Html::addCssClass($this->dropdownOptions, 'dropdown-toggle');
+            if (!isset($this->dropdownOptions['data-bs-toggle'])) {
+                $this->dropdownOptions['data-bs-toggle'] = 'dropdown';
+            }
+            if (!isset($this->dropdownOptions['aria-expanded'])) {
+                $this->dropdownOptions['aria-expanded'] = 'false';
+            }
+        }
+
+public function run()
     {
         $this->initI18N(__DIR__);
         $this->initColumnSelector();
